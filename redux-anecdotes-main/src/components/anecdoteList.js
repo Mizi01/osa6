@@ -5,6 +5,7 @@ import { setNotification } from '../reducers/notificationRecuder'
 const Anecdotes = () => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => state.anecdotes)
+    const filter = useSelector(state => state.filter)
     console.log(anecdotes)
 
     const vote = (anecdote) => {
@@ -17,11 +18,12 @@ const Anecdotes = () => {
       const test2 = [...anecdotes]
     
       const sortByVote = test2.sort((eka, toka) => (eka.votes > toka.votes) ? -1 : 1)
+      const filterByFilter = sortByVote.filter(anecdote => anecdote.content.toLowerCase().includes(filter))
       console.log(sortByVote)
 
     return(
         <>
-        {sortByVote.map(anecdote =>
+        {filterByFilter.map(anecdote =>
             <div key={anecdote.id}>
               <div>
                 {anecdote.content}
